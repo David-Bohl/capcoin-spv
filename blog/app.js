@@ -31,6 +31,10 @@ app.use(viewHelpers.register());
 
 app.use(require('./controllers/'));
 
+const PORT = process.env.PORT || 3000;
+
 models.sequelize.sync().then(() => {
-  app.listen(3000);
+  app.listen(PORT, () => {
+    console.log(`Server is up and running on port ${PORT}`);
+  });
 });
