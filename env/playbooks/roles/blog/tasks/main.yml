@@ -1,2 +1,0 @@
-- name: install node packages
-  npm: path={{ source_root }}/{{ app_name }} state=present
