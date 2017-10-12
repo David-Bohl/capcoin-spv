@@ -40,17 +40,30 @@ module.exports = {
     res.render('posts/new');
   },
   create(req, res) {
-    models.Post.create({
-      email: req.user.email,
-      username: req.user.username,
+    // using the association
+    req.user.createPost({
       slug: getSlug(req.body.title.toLowerCase()),
       title: req.body.title.toLowerCase(),
       body: req.body.body,
     }).then((post) => {
-      res.redirect(`/posts/${post.username}/${post.title}`);
+      res.redirect(`/posts/${req.user.username}/${post.slug}`);
     }).catch(() => {
       res.render('posts/new');
     });
+
+    // Without the sequelize association
+    /*
+    models.Post.create({
+      userId: req.user.id,
+      slug: getSlug(req.body.title.toLowerCase()),
+      title: req.body.title.toLowerCase(),
+      body: req.body.body,
+    }).then((post) => {
+      res.redirect(`/posts/${req.user.username}/${post.slug}`);
+    }).catch(() => {
+      res.render('posts/new');
+    });
+    */
   },
   show(req, res) {
     models.Post.findOne({
