@@ -30,8 +30,10 @@ module.exports = {
     return router;
   },
   index(req, res) {
-    models.Post.findAll().then((post) => {
-      res.render('posts', { post });
+    models.Post.findAll({
+      include: [{model: models.User}]
+    }).then((allPosts) => {
+      res.render('posts', { allPosts });
     });
   },
   new(req, res) {

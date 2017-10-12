@@ -19,14 +19,14 @@
           <a class="btn btn-default" href="/posts/new">Create Post</a>
         </div>
         {{/if}}
-        {{#each post}}
+        {{#each allPosts}}
           <div class="post-preview">
-              <a href="/posts/{{this.username}}/{{this.slug}}">
+              <a href="/posts/{{this.user.username}}/{{this.slug}}">
                   <h2 class="post-title">
                       {{this.title}}
                   </h2>
               </a>
-              <p class="post-meta">Posted by <a href="/users/{{this.username}}">{{this.username}}</a></p>
+              <p class="post-meta">Posted by <a href="/users/{{this.user.username}}">{{this.user.username}}</a></p>
           </div>
           <hr>
         {{/each}}
