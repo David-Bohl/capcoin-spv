@@ -100,9 +100,14 @@ module.exports = {
   edit(req, res) {
     models.Post.findOne({
       where: {
-        username: req.params.username,
         slug: req.params.slug,
       },
+      include: [{
+        model: models.User,
+        where: {
+          username: req.params.username,
+        },
+      }],
     }).then((post) =>
       (post ? res.render('posts/edit', { post }) : res.redirect('/posts'))
     );
@@ -112,21 +117,34 @@ module.exports = {
       title: req.body.title.toLowerCase(),
       slug: getSlug(req.body.title.toLowerCase()),
       body: req.body.body,
-    }, {
+    },
+    {
       where: {
-        username: req.params.username,
         slug: req.params.slug,
       },
-    }).then((post) => {
-      res.redirect(`/posts/${post.username}/${post.title}`);
+      include: [{
+        model: models.User,
+        where: {
+          username: req.params.username,
+        },
+      }],
+      returning: true,
+    }).then(([numRows, rows]) => {
+      const post = rows[0];
+      res.redirect(`/posts/${req.user.username}/${post.slug}`);
     });
   },
   delete(req, res) {
     models.Post.destroy({
       where: {
-        username: req.params.username,
         slug: req.params.slug,
       },
+      include: [{
+        model: models.User,
+        where: {
+          username: req.params.username,
+        },
+      }],
     }).then(() => {
       res.redirect('/posts');
     });
