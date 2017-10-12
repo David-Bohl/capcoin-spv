@@ -66,14 +66,36 @@ module.exports = {
     */
   },
   show(req, res) {
+    // using the association
     models.Post.findOne({
       where: {
-        username: req.params.username,
         slug: req.params.slug,
       },
-    }).then((post) =>
-      (post ? res.render('posts/single', { post }) : res.redirect('/posts'))
-    );
+      include: [{
+        model: models.User,
+        where: {
+          username: req.params.username,
+        },
+      }],
+    }).then((post) => {
+      (post ? res.render('posts/single', { post, user: post.user }) : res.redirect('/posts'))
+    });
+
+    // without the sequelize association (explicit queries)
+    // models.User.findOne({
+    //   where: {
+    //     username: req.params.username,
+    //   }
+    // }).then((user) => {
+    //   models.Post.findOne({
+    //     where: {
+    //       userId: user.id,
+    //       slug: req.params.slug,
+    //     }
+    //   }).then((post) =>
+    //     (post ? res.render('posts/single', { post, user }) : res.redirect('/posts'))
+    //   );
+    // });
   },
   edit(req, res) {
     models.Post.findOne({
