@@ -9,18 +9,18 @@ function passwordsMatch(passwordSubmitted, storedPassword) {
 }
 
 passport.use(new LocalStrategy({
-  usernameField: 'email',
-},
+    usernameField: 'email',
+  },
   (email, password, done) => {
     User.findOne({
       where: { email },
     }).then((user) => {
-      if (user) {
-        if (passwordsMatch(password, user.password) === false) {
-          return done(null, false, { message: 'Incorrect password.' });
-        }
-      } else if (user == null) {
+      if(!user) {
         return done(null, false, { message: 'Incorrect email.' });
+      }
+
+      if (passwordsMatch(password, user.password_hash) === false) {
+        return done(null, false, { message: 'Incorrect password.' });
       }
 
       return done(null, user, { message: 'Successfully Logged In!' });
@@ -29,12 +29,12 @@ passport.use(new LocalStrategy({
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user.username);
+  done(null, user.id);
 });
 
-passport.deserializeUser((username, done) => {
-  User.findById(username).then((user) => {
-    if (user == null) {
+passport.deserializeUser((id, done) => {
+  User.findById(id).then((user) => {
+    if (!user) {
       return done(null, false);
     }
 
