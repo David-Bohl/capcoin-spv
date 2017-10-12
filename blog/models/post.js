@@ -1,26 +1,7 @@
-const Sequelize = require('sequelize');
-
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('post', {
-    email: {
-      type: Sequelize.STRING,
-      unique: 'compositeIndex',
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-        isEmail: true,
-      },
-    },
-    username: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-        isAlphanumeric: true,
-      },
-    },
     slug: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       unique: 'compositeIndex',
       allowNull: false,
       validate: {
@@ -28,7 +9,7 @@ module.exports = (sequelize) => {
       },
     },
     title: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       unique: 'compositeIndex',
       allowNull: false,
       validate: {
@@ -36,13 +17,17 @@ module.exports = (sequelize) => {
       },
     },
     body: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
   });
+
+  Post.associate = (models) => {
+    models.Post.belongsTo(models.User);
+  }
 
   return Post;
 };

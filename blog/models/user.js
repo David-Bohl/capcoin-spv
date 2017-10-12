@@ -1,33 +1,32 @@
-const Sequelize = require('sequelize');
 const bcrypt = require('bcrypt-nodejs');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('user', {
     firstName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     lastName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     username: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true,
+      unique: true,
       validate: {
         notEmpty: true,
         isAlphanumeric: true,
       },
     },
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
@@ -35,14 +34,20 @@ module.exports = (sequelize) => {
         isEmail: true,
       },
     },
+    password_hash: {
+      type: DataTypes.STRING,
+    },
     password: {
-      type: Sequelize.STRING,
-      allowNull: false,
+      type: DataTypes.VIRTUAL,
       validate: {
         notEmpty: true,
       },
     },
   });
+
+  User.associate = (models) => {
+    models.User.hasMany(models.Post);
+  }
 
   User.beforeCreate((user) =>
     new sequelize.Promise((resolve) => {
@@ -50,7 +55,7 @@ module.exports = (sequelize) => {
         resolve(hashedPassword);
       });
     }).then((hashedPw) => {
-      user.password = hashedPw;
+      user.password_hash = hashedPw;
     })
   );
 
