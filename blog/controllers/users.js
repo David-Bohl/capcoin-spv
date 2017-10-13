@@ -11,10 +11,9 @@ module.exports = {
     return router;
   },
   index(req, res) {
-    models.User.findAll().then((user) => {
-      res.render('users', {
-        user,
-      });
+    models.User.findAll({
+    }).then((allUsers) => {
+      res.render('users', { allUsers });
     });
   },
   show(req, res) {
