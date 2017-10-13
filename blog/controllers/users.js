@@ -18,18 +18,20 @@ module.exports = {
   },
   show(req, res) {
     models.User.findOne({
-      where: { username: req.params.username },
+      where: {
+        username: req.params.username,
+      },
+      include: [{
+        model: models.Post,
+      }],
     }).then((user) => {
-      models.Post.findAll({
-        where: { email: user.email },
-      }).then((post) => {
-        res.render('users/single', {
-          user,
-          post,
-        });
-      });
+      if(user) {
+        res.render('users/single', { user: user, allPosts: user.posts });
+      } else {
+        res.redirect('/users');
+      }
     }).catch(() => {
-      res.render('users/single');
+      res.redirect('/users');
     });
   },
 };

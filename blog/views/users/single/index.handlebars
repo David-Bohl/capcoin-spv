@@ -15,9 +15,9 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      {{#each post}}
+      {{#each allPosts}}
         <div class="post-preview">
-          <a href="/posts/{{this.username}}/{{this.title}}">
+          <a href="/posts/{{../user.username}}/{{this.slug}}">
             <h2 class="post-title">
               {{this.title}}
             </h2>
@@ -25,7 +25,7 @@
         </div>
         <hr>
       {{/each}}
-      {{#if post}}
+      {{#if allPosts}}
         <ul class="pager">
           <li class="next">
               <a href="#">Older Posts &rarr;</a>
