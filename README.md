@@ -28,7 +28,7 @@ cd blog
 
 3) Create a database for the blog (_replace `DB_USER` with your postgres user_)
 ```
-createdb -h localhost -U DB_USER cptblog_development
+createdb -h localhost -U DB_USER ctpblog_development
 ```
 
 4) Edit the `/blog/config/config.json` file with corresponding credentials
