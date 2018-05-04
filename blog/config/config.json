@@ -2,7 +2,7 @@
   "development": {
     "username": "ctp_user",
     "password": "ctp_user",
-    "database": "ctpblog_development",
+    "database": "capcoin_spv",
     "host": "localhost",
     "dialect": "postgres"
   }
