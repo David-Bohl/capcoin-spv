@@ -1,12 +1,10 @@
-![](https://travis-ci.com/DonatoM/CUNYTechPipeline.svg?token=PVCqhzNMfi8LeQhYz7N2&branch=master)
+
 
 # Blog
 
 Blog created using Node, Express, and PostgreSQL
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+This blog will be used as boilerplate for the capcoin spv-client
 
 ## Prerequisities
 
@@ -18,20 +16,19 @@ Postgresql Version 9.3+
 
 1) Clone this repository to your host computer.
 ```
-git clone https://github.com/CUNYTechPrep/ctp-microblog.git
+git clone https://github.com/David-Bohl/capcoin-spv.git
 ```
 
-2) Change into the `/blog` app directory
-```
-cd blog
+2) Change into the `/capcoin-spv` app directory
 ```
 
 3) Create a database for the blog (_replace `DB_USER` with your postgres user_)
 ```
-createdb -h localhost -U DB_USER ctpblog_development
+
+createdb -h localhost -U DB_USER capcoin_spv
 ```
 
-4) Edit the `/blog/config/config.json` file with corresponding credentials
+4) Edit the `/config/config.json` file with corresponding credentials
 
 5) Run npm install
 ```
