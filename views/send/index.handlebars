@@ -1,11 +1,10 @@
-<header class="intro-header" style="background: url('/img/crypto2.jpg')">
+<header class="intro-header" style="background: url('/img/send.jpg')">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-heading">
-          <h1>Sign Up</h1>
+          <h1>Send</h1>
           <hr class="small">
-          <span class="subheading">Create Your CapCoin Wallet!</span>
         </div>
       </div>
     </div>
@@ -15,28 +14,10 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <form name="sign-up" action="/sign-up" method="post">
-        <div class="row control-group">
-          <div class="form-group col-xs-12 floating-label-form-group controls">
-            <label>First Name</label>
-            <input type="text" class="form-control" placeholder="First Name" name="firstName" required data-validation-required-message="Please enter your first name.">
-            <p class="help-block text-danger"></p>
-          </div>
-        </div>
-        <div class="row control-group">
-          <div class="form-group col-xs-12 floating-label-form-group controls">
-            <label>Last Name</label>
-            <input type="text" class="form-control" placeholder="Last Name" name="lastName" required data-validation-required-message="Please enter your first name.">
-            <p class="help-block text-danger"></p>
-          </div>
-        </div>
-        <div class="row control-group">
-          <div class="form-group col-xs-12 floating-label-form-group controls">
-            <label>Username</label>
-            <input type="text" class="form-control" placeholder="Username" name="username" required data-validation-required-message="Please enter your username.">
-            <p class="help-block text-danger"></p>
-          </div>
-        </div>
+      {{#each error}}
+        <div class="alert alert-danger">{{this}}</div>
+      {{/each}}
+      <!-- <form name="login" action="/login" method="post">
         <div class="row control-group">
           <div class="form-group col-xs-12 floating-label-form-group controls">
             <label>Email Address</label>
@@ -48,6 +29,28 @@
           <div class="form-group col-xs-12 floating-label-form-group controls">
             <label>Password</label>
             <input type="password" class="form-control" placeholder="Password" name="password" required data-validation-required-message="Please enter your password.">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="form-group col-xs-12">
+              <button type="submit" class="btn btn-default">Login</button>
+          </div>
+        </div>
+      </form> -->
+      <form class="" action="index.html" method="post">
+        <div class="row control-group">
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <label>Wallet Address</label>
+            <input type="text" class="form-control" placeholder="Wallet Address" name="address" required data-validation-required-message="Please enter a valid address.">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="row control-group">
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <label>Amount</label>
+            <input type="number" step="0.000000000000001" class="form-control" placeholder="Amount" name="amount" required data-validation-required-message="Please enter a valid amount.">
             <p class="help-block text-danger"></p>
           </div>
         </div>
