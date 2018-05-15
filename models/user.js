@@ -50,6 +50,10 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
+    balance: {
+      type: DataTypes.DOUBLE,
+      allowNull: true,
+    },
     password_hash: {
       type: DataTypes.STRING,
     },
