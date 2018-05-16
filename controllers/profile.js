@@ -14,7 +14,7 @@ module.exports = {
   },
   index(req, res) {
     // res.render('profile', { user: req.user, success: req.flash('success') });
-    getBalance(req, res);
+    checkBalance(req, res);
   },
   checkBalance(req, res) {
     console.log("REQUESTING BALANCE for: " + req.user.public_key);
