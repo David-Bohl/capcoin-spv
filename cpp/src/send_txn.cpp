@@ -16,8 +16,10 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
   // Usage: ./send_txn <prk> <pbk> <to> <amt>
-  if(argc != 5)
-    return 1;
+  if(argc != 5) {
+      cout << "Usage: ./send_txn <prk> <pbk> <to> <amt>" << std::endl;
+      return 1;
+  }
 
   stringstream ss;
 
