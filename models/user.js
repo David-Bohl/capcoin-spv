@@ -34,6 +34,26 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true,
       },
     },
+    private_key: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    public_key: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    balance: {
+      type: DataTypes.DOUBLE,
+      allowNull: true,
+    },
     password_hash: {
       type: DataTypes.STRING,
     },
