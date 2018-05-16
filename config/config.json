@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "fred",
-    "password": "",
+    "username": "ctp_user",
+    "password": "ctp_user",
     "database": "capcoin_spv",
     "host": "localhost",
     "dialect": "postgres"
