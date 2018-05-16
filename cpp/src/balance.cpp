@@ -17,8 +17,10 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
-  if(argc != 2)
-    return 1;
+  if(argc != 2) {
+      cout << "Usage: ./balance <pbk>" << endl;
+      return 1;
+  }
 
   stringstream ss;
 
