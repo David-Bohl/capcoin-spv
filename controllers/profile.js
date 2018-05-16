@@ -1,5 +1,14 @@
 const express = require('express');
 const Redirect = require('../middlewares/redirect');
+const exec = require('child_process').execFile;
+
+function getBalance(req, res) {
+  exec('./cpp/bin/balance.o', [req.user.dataValues.public_key], function(err, data) {
+       if(err) console.log(err);
+       req.user.dataValues.balance = parseFloat(data.toString());
+       res.render('profile', { user: req.user, success: req.flash('success') });
+   });
+}
 
 module.exports = {
   registerRouter() {
@@ -11,13 +20,13 @@ module.exports = {
     return router;
   },
   index(req, res) {
-    res.render('profile', { user: req.user, success: req.flash('success') });
+    // res.render('profile', { user: req.user, success: req.flash('success') });
+    getBalance(req, res);
   },
   checkBalance(req, res) {
-    console.log("REQUESTING BALANCE for: " + "02edead06502a1f4507523b2edc2320b6732ae1cd2cde77930343d20691e194ff3");
     // console.log("address: " + req.body.address);
     // console.log("amount: " + req.body.amount);
     res.redirect('/profile');
-    
+
   },
 };
